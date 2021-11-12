@@ -7,18 +7,10 @@ use std::path::Path;
 fn task1<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
     let im = image::open(src.as_ref())?;
     im.save(dst.as_ref())?;
-    let window = create_window("image", Default::default())?;
-    window.set_image("source", im)?;
 
-    for event in window.event_channel()? {
-        if let event::WindowEvent::KeyboardInput(event) = event {
-            if event.input.key_code == Some(event::VirtualKeyCode::Escape)
-                && event.input.state.is_pressed()
-            {
-                break;
-            }
-        }
-    }
+    std::process::Command::new("xdg-open")
+        .arg(src.as_ref())
+        .spawn();
 
     Ok(())
 }
