@@ -9,4 +9,3 @@ edition = "2021"
 anyhow = "1.0.45"
 clap = "2.33.3"
 image = "0.23.14"
-show-image = { version = "0.9.4", features = ["image"] }

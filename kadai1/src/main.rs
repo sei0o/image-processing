@@ -1,7 +1,6 @@
 use anyhow::{bail, ensure, Context, Result};
 use clap::App;
 use image::{GenericImageView, ImageBuffer, Luma, Pixel, Rgb};
-use show_image::{create_window, event};
 use std::path::Path;
 
 fn task1<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
@@ -10,7 +9,7 @@ fn task1<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
 
     std::process::Command::new("xdg-open")
         .arg(src.as_ref())
-        .spawn();
+        .spawn()?;
 
     Ok(())
 }
@@ -50,7 +49,6 @@ fn task3<T: AsRef<Path>>(src1: T, src2: T, dst: T, ratio: f64) -> Result<()> {
     Ok(())
 }
 
-#[show_image::main]
 fn main() -> Result<()> {
     let matches = App::new("kadai1")
         .version("0.0.1")
