@@ -130,7 +130,9 @@ fn draw_histogram<T: AsRef<Path>>(
     xrange: Range<i64>,
     mapper: fn(usize, usize) -> (i64, usize),
 ) -> Result<()> {
-    let root = BitMapBackend::new(dst.as_ref(), (1280, 720)).into_drawing_area();
+    // Consult plotters' issue #182 on GitHub
+    //let root = BitMapBackend::new(dst.as_ref(), (1280, 720)).into_drawing_area();
+    let root = SVGBackend::new(dst.as_ref(), (1280, 720)).into_drawing_area();
 
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
